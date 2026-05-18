@@ -22,8 +22,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CapCardTheme {
-                LoginScreen()
-                }
+                val navController = rememberNavController()
+                NavGraph(navController)                }
             }
         }
     }
