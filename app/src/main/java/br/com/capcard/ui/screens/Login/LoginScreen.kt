@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -24,6 +25,10 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -41,12 +46,15 @@ import br.com.capcard.ui.theme.Texto
 
 @Composable
 fun LoginScreen() {
+
+    var email by remember { mutableStateOf("") }
+    var senha by remember { mutableStateOf("") }
+
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(Branco)
     ) {
-
         Image(
             painter = painterResource(id = R.drawable.cartao_login),
             contentDescription = null,
@@ -54,7 +62,6 @@ fun LoginScreen() {
                 .fillMaxWidth()
                 .height(220.dp)
         )
-
 
         Column(
             modifier = Modifier
@@ -65,7 +72,6 @@ fun LoginScreen() {
                 .padding(24.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Image(
                 painter = painterResource(id = R.drawable.logomarca_login),
                 contentDescription = null,
@@ -82,7 +88,6 @@ fun LoginScreen() {
                 color = AzulEscuro
             )
 
-
             Text(
                 text = "Acesse sua conta e gerencie seus cartões com praticidade e segurança.",
                 fontSize = 12.sp,
@@ -94,8 +99,8 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(24.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = email,
+                onValueChange = { email = it },
                 placeholder = { Text("E-mail") },
                 leadingIcon = {
                     Icon(Icons.Default.Email, contentDescription = null)
@@ -107,8 +112,8 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(16.dp))
 
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = senha,
+                onValueChange = { senha = it },
                 placeholder = { Text("Senha") },
                 leadingIcon = {
                     Icon(Icons.Default.Lock, contentDescription = null)
@@ -146,7 +151,6 @@ fun LoginScreen() {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            // Divider
             Row(verticalAlignment = Alignment.CenterVertically) {
                 HorizontalDivider(modifier = Modifier.weight(1f))
                 Text(" ou continue com ", fontSize = 12.sp)
@@ -159,8 +163,8 @@ fun LoginScreen() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                SocialButton("Google")
-                SocialButton("Apple")
+                SocialButton("Google", R.drawable.ic_google)
+                SocialButton("Apple", R.drawable.ic_apple)
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -176,7 +180,10 @@ fun LoginScreen() {
 
 
 @Composable
-fun SocialButton(text: String) {
+fun SocialButton(
+    text: String,
+    iconRes: Int
+) {
     OutlinedButton(
         onClick = {},
         modifier = Modifier
@@ -184,6 +191,20 @@ fun SocialButton(text: String) {
             .width(140.dp),
         shape = RoundedCornerShape(12.dp)
     ) {
-        Text(text)
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Image(
+                painter = painterResource(id = iconRes),
+                contentDescription = text,
+                modifier = Modifier
+                    .size(20.dp)
+            )
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(text)
+        }
     }
 }

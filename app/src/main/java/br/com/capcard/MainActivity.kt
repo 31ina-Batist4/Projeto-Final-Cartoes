@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import br.com.capcard.ui.navigation.NavGraph
+import br.com.capcard.ui.screens.Login.LoginScreen
 import br.com.capcard.ui.theme.CapCardTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,8 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             CapCardTheme {
-                val navController = rememberNavController()
-                NavGraph(navController)
+                LoginScreen()
                 }
             }
         }
