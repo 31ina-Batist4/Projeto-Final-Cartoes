@@ -14,30 +14,4 @@ import androidx.compose.foundation.lazy.items
 fun HomeScreen (
     navController: NavController
 ) {
-    val listaCartoes = listOf(
-        Cartao(
-            nome = "Elina M V S Batista",
-            numero = "4866 6413 3433 1226",
-            bandeira = Bandeira.VISA
-        ),
-        Cartao(
-            nome = "Elina M V S Batista",
-            numero = "5093 7241 1554 5933",
-            bandeira = Bandeira.MASTERCARD
-        ),
-        Cartao(
-            nome = "Elina M V S Batista",
-            numero = "5093 7241 1554 5933",
-            bandeira = Bandeira.ELO
-        )
-    )
-
-    LazyColumn {
-        items(listaCartoes) { cartao ->
-            CartaoDinâmico(cartao)
-        }
-    }
-
-
-
 }
