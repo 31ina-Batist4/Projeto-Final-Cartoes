@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             CapCardTheme {
                 val navController = rememberNavController()
-                NavGraph(navController)
+                 NavGraph(navController)
                 }
             }
         }

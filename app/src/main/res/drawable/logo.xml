@@ -1,0 +1,44 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120">
+
+    <!-- Fundo transparente -->
+    
+    <!-- Forma principal -->
+    <path
+        android:fillColor="#2E7DB7"
+        android:pathData="
+            M60,10
+            C30,10 15,40 25,70
+            C35,95 65,105 90,85
+            C70,90 55,80 50,65
+            C45,50 60,35 80,35
+            C70,20 65,15 60,10
+        "/>
+
+    <!-- Curva interna -->
+    <path
+        android:fillColor="#4FC3F7"
+        android:pathData="
+            M65,25
+            C50,25 40,40 45,55
+            C50,70 65,75 80,65
+            C65,68 55,60 55,50
+            C55,40 65,35 75,40
+            C70,30 68,28 65,25
+        "/>
+
+    <!-- Parte inferior -->
+    <path
+        android:fillColor="#00BCD4"
+        android:pathData="
+            M45,60
+            C35,70 40,85 55,90
+            C70,95 85,85 90,75
+            C80,85 65,85 55,75
+            C50,70 48,65 45,60
+        "/>
+
+</vector>
