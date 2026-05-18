@@ -5,6 +5,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import br.com.capcard.ui.screens.HomeScreen
+import br.com.capcard.ui.screens.BenefitsScreen
 
 
 @Composable
@@ -17,6 +18,10 @@ fun NavGraph(navController: NavHostController) {
 
       composable(Routes.HOME) {
           HomeScreen(navController)
+      }
+
+      composable(Routes.BENEFITS) {
+          BenefitsScreen(navController)
       }
 
   }
