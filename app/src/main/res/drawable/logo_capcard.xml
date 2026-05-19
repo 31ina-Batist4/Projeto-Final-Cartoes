@@ -1,0 +1,18 @@
+<svg width="300" height="120" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+
+	<image 
+        href="ic_logo.png"
+        x="0"
+        y="0"
+        width="80"
+        height="100" />
+
+    <text x="65" y="60"
+        font-family="Arial, sans-serif"
+        font-size="36"
+        font-weight="bold"
+        fill="#FFFF00">
+        CAPCARD
+    </text>
+
+</svg>

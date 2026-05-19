@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import br.com.capcard.ui.screens.HomeScreen
 import br.com.capcard.ui.screens.BenefitsScreen
+import br.com.capcard.ui.screens.Cartoes.MeusCartoesScreen
 import br.com.capcard.ui.screens.resumodegastos.ResumoDeGastosScreen
 
 
@@ -28,6 +29,10 @@ fun NavGraph(navController: NavHostController) {
 
       composable(Routes.RESUME) {
           ResumoDeGastosScreen(navController)
+      }
+
+      composable(Routes.CARTOES) {
+          MeusCartoesScreen(navController)
       }
   }
 
