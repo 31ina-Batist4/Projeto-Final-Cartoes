@@ -1,4 +1,4 @@
-package br.com.capcard.ui.screens.Cartoes
+package br.com.capcard.ui.screens.cartoes
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

@@ -1,4 +1,4 @@
-package br.com.capcard.ui.screens
+package br.com.capcard.ui.screens.beneficios
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

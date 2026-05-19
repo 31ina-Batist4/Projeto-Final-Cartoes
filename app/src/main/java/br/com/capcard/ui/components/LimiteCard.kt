@@ -1,4 +1,4 @@
-package br.com.capcard.ui.screens.dashboard
+package br.com.capcard.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
