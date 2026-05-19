@@ -20,6 +20,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import br.com.capcard.ui.components.Atalho
+import br.com.capcard.ui.components.CardCarousel
+import br.com.capcard.ui.components.LimiteCard
+import br.com.capcard.ui.components.Transacoes
 import br.com.capcard.ui.theme.AzulEscuro
 
 @Composable

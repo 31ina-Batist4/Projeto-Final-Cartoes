@@ -1,4 +1,4 @@
-package br.com.capcard.ui.screens.Login
+package br.com.capcard.ui.screens.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
