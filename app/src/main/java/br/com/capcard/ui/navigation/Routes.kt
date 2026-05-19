@@ -5,4 +5,7 @@ object Routes {
     const val BENEFITS = "benefits"
     const val RESUME = "resume"
     const val CARTOES = "cartoes"
+    const val LOGIN = "login"
+    const val FATURAS = "faturas"
+    const val DASHBOARD = "dashboard"
 }

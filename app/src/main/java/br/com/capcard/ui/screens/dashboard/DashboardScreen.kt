@@ -19,10 +19,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import br.com.capcard.ui.theme.AzulEscuro
 
 @Composable
-fun DashboardScreen(){
+fun DashboardScreen(navController: NavHostController) {
     Column(
         modifier = Modifier.fillMaxSize().background(Color.White).statusBarsPadding().padding(25.dp)) {
         Row(

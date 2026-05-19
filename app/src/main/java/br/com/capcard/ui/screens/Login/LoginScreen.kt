@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -39,13 +40,17 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.capcard.R
+import br.com.capcard.ui.navigation.Routes
 import br.com.capcard.ui.theme.AzulEscuro
 import br.com.capcard.ui.theme.Branco
 import br.com.capcard.ui.theme.Texto
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(
+    navController: NavController
+) {
 
     var email by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
@@ -53,6 +58,7 @@ fun LoginScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
+            .statusBarsPadding()
             .background(Branco)
     ) {
         Image(
@@ -140,7 +146,7 @@ fun LoginScreen() {
             Spacer(modifier = Modifier.height(20.dp))
 
             Button(
-                onClick = {},
+                onClick = {navController.navigate(Routes.DASHBOARD)},
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),

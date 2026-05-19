@@ -1,4 +1,4 @@
-package br.com.capcard.ui.screens
+package br.com.capcard.ui.screens.Faturas
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -14,10 +14,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import br.com.capcard.model.FaturaHistorico
 
 @Composable
-fun TelaFaturas() {
+fun FaturasScreen(
+    navController: NavController
+) {
 
     val listaHistorico = listOf(
         FaturaHistorico("Maio", "R$ 1.120,40", "Pago"),
@@ -190,14 +193,5 @@ fun ItemHistoricoFatura(
             text = "• ${item.status}",
             color = Color(0xFF00A651)
         )
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTelaFaturas() {
-
-    MaterialTheme {
-        TelaFaturas()
     }
 }
