@@ -1,6 +1,7 @@
 package br.com.capcard.ui.screens.beneficios
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -9,7 +10,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -26,6 +27,22 @@ import br.com.capcard.ui.theme.*
 
 @Composable
 fun BenefitsScreen(navController: NavController) {
+    var showDialog by remember { mutableStateOf(false) }
+    var dialogTitle by remember { mutableStateOf("") }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text(text = "Funcionalidade") },
+            text = { Text(text = "A funcionalidade para '$dialogTitle' será implementada em breve.") },
+            confirmButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("OK")
+                }
+            }
+        )
+    }
+
     Scaffold(
         topBar = {
             ToolbarComponent(
@@ -49,11 +66,20 @@ fun BenefitsScreen(navController: NavController) {
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
             item {
-                MainBenefitCard()
+                MainBenefitCard(onButtonClick = {
+                    dialogTitle = "Ver Pontos"
+                    showDialog = true
+                })
             }
 
             items(benefitItems) { item ->
-                BenefitListItem(item)
+                BenefitListItem(
+                    item = item,
+                    onItemClick = {
+                        dialogTitle = item.title
+                        showDialog = true
+                    }
+                )
             }
             
             item {
@@ -64,7 +90,7 @@ fun BenefitsScreen(navController: NavController) {
 }
 
 @Composable
-fun MainBenefitCard() {
+fun MainBenefitCard(onButtonClick: () -> Unit) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -105,7 +131,7 @@ fun MainBenefitCard() {
                     }
 
                     Button(
-                        onClick = { /* TODO */ },
+                        onClick = onButtonClick,
                         colors = ButtonDefaults.buttonColors(containerColor = Branco),
                         shape = RoundedCornerShape(12.dp),
                         contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
@@ -125,12 +151,14 @@ fun MainBenefitCard() {
                         .align(Alignment.CenterVertically),
                     contentAlignment = Alignment.Center
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.Star,
-                        contentDescription = "Ícone de pontos",
-                        modifier = Modifier.size(80.dp),
-                        tint = AzulMedio
-                    )
+                    Box(contentAlignment = Alignment.BottomEnd) {
+                        Icon(
+                            imageVector = Icons.Default.CardGiftcard,
+                            contentDescription = "Ícone de presente",
+                            modifier = Modifier.size(80.dp),
+                            tint = AzulMedio
+                        )
+                    }
                 }
             }
         }
@@ -138,9 +166,11 @@ fun MainBenefitCard() {
 }
 
 @Composable
-fun BenefitListItem(item: BenefitItem) {
+fun BenefitListItem(item: BenefitItem, onItemClick: () -> Unit) {
     Card(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .clickable { onItemClick() },
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = Branco),
         elevation = CardDefaults.cardElevation(defaultElevation = 1.dp)
