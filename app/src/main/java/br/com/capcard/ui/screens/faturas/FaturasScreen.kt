@@ -23,6 +23,7 @@ import br.com.capcard.ui.theme.AzulEscuro
 import br.com.capcard.ui.theme.AzulMedio
 import br.com.capcard.ui.theme.Branco
 import br.com.capcard.ui.theme.BrancoG
+import br.com.capcard.ui.theme.Gelo
 import java.nio.file.WatchEvent
 
 @Composable
@@ -48,7 +49,8 @@ fun FaturasScreen(
        },
        bottomBar = {
            BottomBarComponent(navController)
-       }
+       },
+       containerColor = Gelo
 
    ) { padding ->
        Column(

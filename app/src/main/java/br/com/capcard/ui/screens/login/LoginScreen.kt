@@ -85,7 +85,7 @@ fun LoginScreen(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
-            .background(BrancoG)
+            .background(Gelo),
     ) {
         Image(
             painter = painterResource(id = R.drawable.cartao_login),

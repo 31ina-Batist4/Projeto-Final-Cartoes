@@ -23,6 +23,7 @@ import br.com.capcard.R
 import br.com.capcard.ui.navigation.Routes
 import br.com.capcard.ui.theme.AzulMedio
 import br.com.capcard.ui.theme.Branco
+import br.com.capcard.ui.theme.Texto
 
 data class BottomItem(
     val label: String,
@@ -68,8 +69,8 @@ fun BottomBarComponent(
                             painter = painterResource(
                                 id = if(selecionado) item.iconFilled else item.iconOutline),
                             contentDescription = item.label,
-                            tint = if(selecionado) AzulMedio else Color.Gray,
-                            modifier = Modifier.size(24.dp)
+                            tint = if(selecionado) AzulMedio else Texto,
+                            modifier = Modifier.size(20.dp)
                         )
                     }
                 },
@@ -81,8 +82,8 @@ fun BottomBarComponent(
                 colors = NavigationBarItemDefaults.colors(
                     selectedIconColor = AzulMedio,
                     selectedTextColor = AzulMedio,
-                    unselectedIconColor = Color.Gray,
-                    unselectedTextColor = Color.Gray
+                    unselectedIconColor = Texto,
+                    unselectedTextColor = Texto
                 )
             )
         }

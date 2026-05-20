@@ -28,6 +28,7 @@ import br.com.capcard.ui.components.BottomBarComponent
 import br.com.capcard.ui.navigation.Routes
 import br.com.capcard.ui.theme.AzulClaro
 import br.com.capcard.ui.theme.AzulEscuro
+import br.com.capcard.ui.theme.Gelo
 
 @Composable
 fun MeusCartoesScreen(
@@ -70,7 +71,8 @@ fun MeusCartoesScreen(
         },
         bottomBar = {
             BottomBarComponent(navController)
-        }
+        },
+        containerColor = Gelo
 
     ) { padding ->
         Column  (

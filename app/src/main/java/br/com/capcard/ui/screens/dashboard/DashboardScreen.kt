@@ -27,6 +27,7 @@ import br.com.capcard.ui.theme.AzulEscuro
 import br.com.capcard.ui.theme.Branco
 import br.com.capcard.ui.theme.Texto
 import br.com.capcard.R
+import br.com.capcard.ui.theme.Gelo
 
 @Composable
 fun DashboardScreen(navController: NavHostController) {
@@ -34,7 +35,8 @@ fun DashboardScreen(navController: NavHostController) {
     Scaffold (
         bottomBar = {
             BottomBarComponent(navController)
-        }
+        },
+        containerColor = Gelo
     ) { padding ->
         Column(
             modifier = Modifier.fillMaxSize().background(Branco).padding(25.dp)) {
