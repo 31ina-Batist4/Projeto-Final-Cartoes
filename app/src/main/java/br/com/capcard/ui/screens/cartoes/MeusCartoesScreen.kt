@@ -61,12 +61,15 @@ fun MeusCartoesScreen(
     Scaffold(
         topBar = {
             ToolbarComponent(
-                onBack = {navController.navigate(Routes.HOME)},// navController.popBackStack() },
-                onAdd = {}
+                onBack = { navController.popBackStack() },
+                onAdd = {},
+                true,
+                true,
+                "Meus cartões"
             )
         },
         bottomBar = {
-            BottomBarComponent()
+            BottomBarComponent(navController)
         }
 
     ) { padding ->
@@ -84,14 +87,15 @@ fun MeusCartoesScreen(
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(24.dp))
-                    .padding(horizontal = 24.dp)
+                    .padding(horizontal = 16.dp)
                     .background(
                         Brush.horizontalGradient(
                             colors = listOf(
                                 AzulClaro,
                                 AzulEscuro
                             )
-                        )
+                        ),
+                        shape = RoundedCornerShape(24.dp),
                     )
             )
             LazyColumn {

@@ -17,25 +17,32 @@ import br.com.capcard.ui.theme.AzulEscuro
 @Composable
 fun ToolbarComponent(
     onBack: () -> Unit,
-    onAdd: () -> Unit
+    onAdd: () -> Unit,
+    back: Boolean,
+    add: Boolean,
+    title: String
 ) {
     CenterAlignedTopAppBar(
         title = {
             Text(
-                text = "Meus cartões",
+                text = title,
                 style = MaterialTheme.typography.titleMedium,
                 color = AzulEscuro
             )
         },
         navigationIcon = {
-            IconButton(onClick = onBack) {
-              Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Voltar", tint = AzulEscuro)
-            }
+          if(back) {
+              IconButton(onClick = onBack) {
+                  Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Voltar", tint = AzulEscuro)
+              }
+          }
         },
         actions = {
-            IconButton(onClick = onAdd) {
-                Icon(Icons.Default.Add, contentDescription = "Adicionar", tint = AzulEscuro
-                )
+            if(add) {
+                IconButton(onClick = onAdd) {
+                    Icon(Icons.Default.Add, contentDescription = "Adicionar", tint = AzulEscuro
+                    )
+                }
             }
         }
     )

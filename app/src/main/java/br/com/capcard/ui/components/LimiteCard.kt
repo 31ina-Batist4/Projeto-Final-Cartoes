@@ -13,6 +13,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -27,6 +28,7 @@ import br.com.capcard.ui.theme.AzulClaro
 import br.com.capcard.ui.theme.AzulEscuro
 import br.com.capcard.ui.theme.AzulMedio
 import br.com.capcard.ui.theme.Branco
+import br.com.capcard.ui.theme.Texto
 
 @Composable
 fun LimiteCard() {
@@ -42,23 +44,22 @@ fun LimiteCard() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier.fillMaxWidth()) {
-                    Text("Limite disponível", color = Color.Gray)
+                    Text("Limite disponível", color = Texto, style = MaterialTheme.typography.labelSmall)
                     Icon(
                         painter = painterResource(R.drawable.visualizar),
                         contentDescription = "Mostrar limite",
-                        tint = Color.Black,
+                        tint = Texto,
                         modifier = Modifier.size(18.dp))
                 }
                 Text(
                     "R$ 4.250,00",
-                    fontSize = 22.sp,
-                    fontWeight = FontWeight.Bold,
+                    style = MaterialTheme.typography.titleMedium,
                     color = AzulEscuro
                 )
                 Row(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.SpaceBetween) {
-                    Text("de R$ 7.500,00", color = Color.Gray)
+                    Text("de R$ 7.500,00", color = Texto, style = MaterialTheme.typography.labelSmall)
                     Text(
                         "56%",
                         color = AzulEscuro,
@@ -86,9 +87,9 @@ fun LimiteCard() {
                 elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
-                    Text("Gastos deste mês", color = Color.Gray, fontSize = 12.sp)
+                    Text("Gastos deste mês",color = Texto, style = MaterialTheme.typography.labelSmall)
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text("R$ 3.250,80", fontWeight = FontWeight.Bold)
+                    Text("R$ 3.250,80", style = MaterialTheme.typography.bodyMedium)
                 }
             }
             Card(
@@ -98,9 +99,9 @@ fun LimiteCard() {
                 elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
             ) {
                 Column(modifier = Modifier.padding(12.dp)) {
-                    Text("Melhor dia de compra", color = Color.Gray, fontSize = 12.sp)
+                    Text("Melhor dia de compra", color = Texto, style = MaterialTheme.typography.labelSmall)
                     Spacer(modifier = Modifier.height(4.dp))
-                    Text("05 MAI", fontWeight = FontWeight.Bold, color = AzulClaro)
+                    Text("05 MAI", style = MaterialTheme.typography.bodyMedium, color = AzulMedio)
                 }
             }
         }

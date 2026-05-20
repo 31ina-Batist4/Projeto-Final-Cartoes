@@ -15,15 +15,20 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,16 +40,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.capcard.R
 import br.com.capcard.ui.navigation.Routes
 import br.com.capcard.ui.theme.AzulEscuro
+import br.com.capcard.ui.theme.AzulMedio
+import br.com.capcard.ui.theme.AzulSuave
 import br.com.capcard.ui.theme.Branco
+import br.com.capcard.ui.theme.BrancoG
+import br.com.capcard.ui.theme.Gelo
 import br.com.capcard.ui.theme.Texto
 
 @Composable
@@ -54,12 +66,26 @@ fun LoginScreen(
 
     var email by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
+    val titulo = buildAnnotatedString {
+        append("Bem-vindo de volta, ")
+
+        pushStringAnnotation(
+            tag = "TITULO",
+            annotation = "titulo"
+        )
+
+        withStyle(
+            style = SpanStyle(color = AzulMedio) ) {
+            append("MARIA")
+        }
+        pop()
+    }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding()
-            .background(Branco)
+            .background(BrancoG)
     ) {
         Image(
             painter = painterResource(id = R.drawable.cartao_login),
@@ -88,15 +114,14 @@ fun LoginScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             Text(
-                text = "Bem-vindo de volta, MARIA",
-                fontSize = 20.sp,
-                fontWeight = FontWeight.Bold,
+                text = titulo,
+                style = MaterialTheme.typography.titleLarge,
                 color = AzulEscuro
             )
 
             Text(
                 text = "Acesse sua conta e gerencie seus cartões com praticidade e segurança.",
-                fontSize = 12.sp,
+                style = MaterialTheme.typography.labelSmall,
                 color = Texto,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(top = 8.dp)
@@ -107,11 +132,21 @@ fun LoginScreen(
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                placeholder = { Text("E-mail") },
+                label = { Text("E-mail",color = Texto) },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Email
+                ),
                 leadingIcon = {
-                    Icon(Icons.Default.Email, contentDescription = null)
+                    Icon(Icons.Default.Email, contentDescription = null, tint = AzulMedio)
                 },
                 modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Texto,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                    focusedLabelColor = Texto,
+                    unfocusedLabelColor = Texto,
+                    cursorColor = Texto
+                ),
                 shape = RoundedCornerShape(12.dp)
             )
 
@@ -120,15 +155,22 @@ fun LoginScreen(
             OutlinedTextField(
                 value = senha,
                 onValueChange = { senha = it },
-                placeholder = { Text("Senha") },
+                label = { Text("Senha", color = Texto)},
                 leadingIcon = {
-                    Icon(Icons.Default.Lock, contentDescription = null)
+                    Icon(Icons.Default.Lock, contentDescription = null, tint = AzulMedio)
                 },
                 trailingIcon = {
-                    Icon(Icons.Default.Visibility, contentDescription = null)
+                    Icon(Icons.Default.Visibility, contentDescription = null, tint = Texto)
                 },
                 visualTransformation = PasswordVisualTransformation(),
                 modifier = Modifier.fillMaxWidth(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Texto,
+                    unfocusedBorderColor = MaterialTheme.colorScheme.surfaceVariant,
+                    focusedLabelColor = Texto,
+                    unfocusedLabelColor = Texto,
+                    cursorColor = Texto
+                ),
                 shape = RoundedCornerShape(12.dp)
             )
 
@@ -138,8 +180,8 @@ fun LoginScreen(
             ) {
                 Text(
                     text = "Esqueceu sua senha?",
-                    fontSize = 12.sp,
-                    color = Color(0xFF1E88E5)
+                    style = MaterialTheme.typography.labelSmall,
+                    color = AzulMedio
                 )
             }
 
@@ -150,16 +192,20 @@ fun LoginScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                shape = RoundedCornerShape(12.dp)
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = AzulMedio,
+                    contentColor = Branco
+                )
             ) {
-                Text("Entrar")
+                Text("Entrar", style = MaterialTheme.typography.bodyMedium, color = Branco)
             }
 
             Spacer(modifier = Modifier.height(20.dp))
 
             Row(verticalAlignment = Alignment.CenterVertically) {
                 HorizontalDivider(modifier = Modifier.weight(1f))
-                Text(" ou continue com ", fontSize = 12.sp)
+                Text(" ou continue com ", style = MaterialTheme.typography.labelSmall, color = Texto)
                 HorizontalDivider(modifier = Modifier.weight(1f))
             }
 
@@ -175,10 +221,23 @@ fun LoginScreen(
 
             Spacer(modifier = Modifier.height(20.dp))
 
+            val texto = buildAnnotatedString {
+                append("Ainda não tem uma conta? ")
+
+                pushStringAnnotation(
+                    tag = "CADASTRO",
+                    annotation = "cadastro"
+                )
+                withStyle(
+                    style = SpanStyle(color = AzulMedio) ) {
+                        append("Cadastre-se")
+                    }
+                   pop()
+            }
             Text(
-                text = "Ainda não tem uma conta? Cadastre-se",
-                fontSize = 12.sp,
-                color = Color.Gray
+                text = texto,
+                style = MaterialTheme.typography.labelSmall,
+                color = Texto
             )
         }
     }

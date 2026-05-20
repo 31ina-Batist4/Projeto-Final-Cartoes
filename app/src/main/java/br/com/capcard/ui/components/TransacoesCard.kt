@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,6 +24,8 @@ import androidx.compose.ui.unit.sp
 import br.com.capcard.R
 import br.com.capcard.ui.theme.AzulClaro
 import br.com.capcard.ui.theme.AzulEscuro
+import br.com.capcard.ui.theme.AzulMedio
+import br.com.capcard.ui.theme.Texto
 
 @Composable
 fun Transacoes() {
@@ -32,14 +35,13 @@ fun Transacoes() {
             horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
                 "Últimas transações",
-                fontWeight = FontWeight.Bold,
+                style = MaterialTheme.typography.bodyMedium,
                 color = AzulEscuro
             )
             Text(
                 "Ver todas",
-                color = AzulClaro,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.Bold
+                color = AzulMedio,
+                style = MaterialTheme.typography.bodyMedium
             )
         }
         Spacer(modifier = Modifier.height(8.dp))
@@ -68,23 +70,24 @@ fun TransacoesItem(title: String, subtitle: String, value: String,
             )
             Spacer(modifier = Modifier.width(6.dp))
             Column {
-                Text(title, fontWeight = FontWeight.Bold)
+                Text(title, style = MaterialTheme.typography.bodyMedium, color = Color.DarkGray)
                 Text(
                     subtitle,
-                    fontSize = 10.sp,
-                    color = Color.Gray
+                    style = MaterialTheme.typography.labelSmall,
+                    color = Texto
                 )
             }
         }
         Column(horizontalAlignment = Alignment.End) {
             Text(
                 value,
-                fontWeight = FontWeight.Bold
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.DarkGray
             )
             Text(
                 date,
-                fontSize = 10.sp,
-                color = Color.Gray
+                style = MaterialTheme.typography.labelSmall,
+                color = Texto
             )
         }
     }
