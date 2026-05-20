@@ -28,6 +28,7 @@ import br.com.capcard.ui.components.BottomBarComponent
 import br.com.capcard.ui.navigation.Routes
 import br.com.capcard.ui.theme.AzulClaro
 import br.com.capcard.ui.theme.AzulEscuro
+import br.com.capcard.ui.theme.Gelo
 
 @Composable
 fun MeusCartoesScreen(
@@ -61,13 +62,17 @@ fun MeusCartoesScreen(
     Scaffold(
         topBar = {
             ToolbarComponent(
-                onBack = {navController.navigate(Routes.HOME)},// navController.popBackStack() },
-                onAdd = {}
+                onBack = { navController.popBackStack() },
+                onAdd = {},
+                true,
+                true,
+                "Meus cartões"
             )
         },
         bottomBar = {
-            BottomBarComponent()
-        }
+            BottomBarComponent(navController)
+        },
+        containerColor = Gelo
 
     ) { padding ->
         Column  (
@@ -84,14 +89,15 @@ fun MeusCartoesScreen(
                     .fillMaxWidth()
                     .height(200.dp)
                     .clip(RoundedCornerShape(24.dp))
-                    .padding(horizontal = 24.dp)
+                    .padding(horizontal = 16.dp)
                     .background(
                         Brush.horizontalGradient(
                             colors = listOf(
                                 AzulClaro,
                                 AzulEscuro
                             )
-                        )
+                        ),
+                        shape = RoundedCornerShape(24.dp),
                     )
             )
             LazyColumn {

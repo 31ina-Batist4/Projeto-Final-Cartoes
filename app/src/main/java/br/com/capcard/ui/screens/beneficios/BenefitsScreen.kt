@@ -20,24 +20,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import br.com.capcard.ui.components.BottomBarComponent
+import br.com.capcard.ui.components.ToolbarComponent
 import br.com.capcard.ui.theme.*
 
 @Composable
 fun BenefitsScreen(navController: NavController) {
     Scaffold(
         topBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 40.dp, bottom = 16.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                Text(
-                    text = "Benefícios",
-                    style = AppTypography.titleMedium,
-                    color = AzulEscuro
-                )
-            }
+            ToolbarComponent(
+                onBack = { navController.popBackStack() },
+                onAdd = {},
+                true,
+                false,
+                "Benefícios"
+            )
+        },
+        bottomBar = {
+            BottomBarComponent(navController)
         },
         containerColor = Gelo
     ) { paddingValues ->

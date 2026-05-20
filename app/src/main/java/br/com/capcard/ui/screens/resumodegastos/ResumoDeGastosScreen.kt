@@ -33,6 +33,7 @@ import androidx.compose.material.icons.filled.ChevronLeft
 import androidx.compose.material.icons.filled.ChevronRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,8 +51,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import br.com.capcard.preview.previewData
+import br.com.capcard.ui.components.BottomBarComponent
 import br.com.capcard.ui.components.ItemDeCategoria
 import br.com.capcard.ui.components.Grafico
+import br.com.capcard.ui.components.ToolbarComponent
 import br.com.capcard.ui.theme.AzulEscuro
 import br.com.capcard.ui.theme.AzulMedio
 import br.com.capcard.ui.theme.Branco
@@ -68,217 +71,232 @@ fun ResumoDeGastosScreen(navController: NavController) {
 
     val currentData = previewData[currentIndex]
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(Gelo)
-            .statusBarsPadding()
-            .pointerInput(Unit) {
-                detectHorizontalDragGestures { _, dragAmount ->
-                    if (dragAmount > 50 && currentIndex > 0) {
-                        direction = -1
-                        currentIndex--
-                    } else if (dragAmount < -50 && currentIndex < previewData.lastIndex) {
-                        direction = 1
-                        currentIndex++
-                    }
-                }
-            }
-    ) {
+    Scaffold (
+        topBar = {
+            ToolbarComponent(
+                onBack = { navController.popBackStack() },
+                onAdd = {},
+                true,
+                false,
+                "Resumo de gastos"
+            )
+        },
+        bottomBar = {
+            BottomBarComponent(navController)
+        }
 
-        Column(
+    ) { padding ->
+        Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(16.dp)
-        ) {
-
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                Icon(Icons.Default.ArrowBack, contentDescription = null)
-                Spacer(Modifier.weight(1f))
-                Text(
-                    "Resumo de gastos",
-                    fontWeight = FontWeight.Bold,
-                    color = AzulEscuro
-                )
-                Spacer(Modifier.weight(1f))
-            }
-
-            Spacer(Modifier.height(16.dp))
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Branco, RoundedCornerShape(20.dp))
-                    .padding(vertical = 12.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-
-                IconButton(
-                    onClick = {
-                        if (currentIndex > 0) {
+                .background(Gelo)
+                .statusBarsPadding()
+                .pointerInput(Unit) {
+                    detectHorizontalDragGestures { _, dragAmount ->
+                        if (dragAmount > 50 && currentIndex > 0) {
                             direction = -1
                             currentIndex--
-                        }
-                    },
-                    enabled = currentIndex > 0
-                ) {
-                    Icon(Icons.Default.ChevronLeft, null)
-                }
-
-                Text(
-                    currentData.month,
-                    color = AzulEscuro,
-                    fontWeight = FontWeight.SemiBold
-                )
-
-                IconButton(
-                    onClick = {
-                        if (currentIndex < previewData.lastIndex) {
+                        } else if (dragAmount < -50 && currentIndex < previewData.lastIndex) {
                             direction = 1
                             currentIndex++
                         }
-                    },
-                    enabled = currentIndex < previewData.lastIndex
-                ) {
-                    Icon(Icons.Default.ChevronRight, null)
+                    }
                 }
-            }
+        ) {
 
-            Spacer(Modifier.height(20.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp)
+            ) {
 
-            AnimatedContent(
-                targetState = currentData,
-                transitionSpec = {
-                    slideInHorizontally { it * direction } + fadeIn() togetherWith
-                            slideOutHorizontally { -it * direction } + fadeOut()
-                },
-                label = "content_animation"
-            ) { data ->
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(Icons.Default.ArrowBack, contentDescription = null)
+                    Spacer(Modifier.weight(1f))
+                    Text(
+                        "",
+                        fontWeight = FontWeight.Bold,
+                    )
+                    Spacer(Modifier.weight(1f))
+                }
 
-                Column {
+                Spacer(Modifier.height(16.dp))
 
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .background(Branco, RoundedCornerShape(20.dp))
+                        .padding(vertical = 12.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    IconButton(
+                        onClick = {
+                            if (currentIndex > 0) {
+                                direction = -1
+                                currentIndex--
+                            }
+                        },
+                        enabled = currentIndex > 0
                     ) {
-                        Column {
-                            Text("Total gasto", color = Texto)
+                        Icon(Icons.Default.ChevronLeft, null, tint = AzulMedio)
+                    }
+
+                    Text(
+                        currentData.month,
+                        color = AzulMedio,
+                        fontWeight = FontWeight.SemiBold
+                    )
+
+                    IconButton(
+                        onClick = {
+                            if (currentIndex < previewData.lastIndex) {
+                                direction = 1
+                                currentIndex++
+                            }
+                        },
+                        enabled = currentIndex < previewData.lastIndex
+                    ) {
+                        Icon(Icons.Default.ChevronRight, null, tint = AzulMedio)
+                    }
+                }
+
+                Spacer(Modifier.height(20.dp))
+
+                AnimatedContent(
+                    targetState = currentData,
+                    transitionSpec = {
+                        slideInHorizontally { it * direction } + fadeIn() togetherWith
+                                slideOutHorizontally { -it * direction } + fadeOut()
+                    },
+                    label = "content_animation"
+                ) { data ->
+
+                    Column {
+
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Column {
+                                Text("Total gasto", color = Texto)
+                                Text(
+                                    data.total,
+                                    fontSize = 24.sp,
+                                    fontWeight = FontWeight.Bold,
+                                    color = AzulEscuro
+                                )
+                            }
+
                             Text(
-                                data.total,
-                                fontSize = 24.sp,
-                                fontWeight = FontWeight.Bold,
-                                color = AzulEscuro
+                                data.variation,
+                                color = if (data.variation.contains("▼"))
+                                    Color(0xFF2ECC71)
+                                else
+                                    Color.Red
                             )
                         }
 
-                        Text(
-                            data.variation,
-                            color = if (data.variation.contains("▼"))
-                                Color(0xFF2ECC71)
-                            else
-                                Color.Red
-                        )
-                    }
+                        Spacer(Modifier.height(16.dp))
 
-                    Spacer(Modifier.height(16.dp))
+                        Grafico(data.chartValues)
 
-                    Grafico(data.chartValues)
+                        Spacer(Modifier.height(8.dp))
 
-                    Spacer(Modifier.height(8.dp))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        data.chartLabels.forEach {
-                            Text(it, color = Texto, fontSize = 12.sp)
-                        }
-                    }
-
-                    Spacer(Modifier.height(20.dp))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        Text(
-                            "Categorias",
-                            color = AzulEscuro,
-                            fontWeight = FontWeight.Bold
-                        )
-                        Text(
-                            "Ver todas",
-                            color = AzulMedio,
-                            modifier = Modifier.clickable {
-                                expanded = true
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            data.chartLabels.forEach {
+                                Text(it, color = Texto, fontSize = 12.sp)
                             }
-                        )
-                    }
+                        }
 
-                    Spacer(Modifier.height(12.dp))
+                        Spacer(Modifier.height(20.dp))
 
-                    data.categories.forEach {
-                        ItemDeCategoria(it)
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween
+                        ) {
+                            Text(
+                                "Categorias",
+                                color = AzulEscuro,
+                                fontWeight = FontWeight.Bold
+                            )
+                            Text(
+                                "Ver todas",
+                                color = AzulMedio,
+                                modifier = Modifier.clickable {
+                                    expanded = true
+                                }
+                            )
+                        }
+
                         Spacer(Modifier.height(12.dp))
+
+                        data.categories.forEach {
+                            ItemDeCategoria(it)
+                            Spacer(Modifier.height(12.dp))
+                        }
                     }
                 }
             }
-        }
 
-        if (expanded) {
+            if (expanded) {
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(Color.Black.copy(alpha = 0.4f))
-                    .clickable { expanded = false }
-            )
-
-            AnimatedVisibility(
-                visible = expanded,
-                enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
-                exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
-                modifier = Modifier.align(Alignment.BottomCenter)
-            ) {
-
-                Surface(
+                Box(
                     modifier = Modifier
-                        .fillMaxWidth()
-                        .fillMaxHeight(),
-                    shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
-                    color = Branco
+                        .fillMaxSize()
+                        .background(Color.Black.copy(alpha = 0.4f))
+                        .clickable { expanded = false }
+                )
+
+                AnimatedVisibility(
+                    visible = expanded,
+                    enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+                    exit = slideOutVertically(targetOffsetY = { it }) + fadeOut(),
+                    modifier = Modifier.align(Alignment.BottomCenter)
                 ) {
 
-                    Column(
+                    Surface(
                         modifier = Modifier
-                            .fillMaxSize()
-                            .padding(16.dp)
+                            .fillMaxWidth()
+                            .fillMaxHeight(),
+                        shape = RoundedCornerShape(topStart = 24.dp, topEnd = 24.dp),
+                        color = Branco
                     ) {
 
-                        Text(
-                            "Categorias",
-                            fontWeight = FontWeight.Bold,
-                            color = AzulEscuro
-                        )
-
-                        Spacer(Modifier.height(16.dp))
-
-                        LazyColumn {
-                            items(currentData.categories) {
-                                ItemDeCategoria(it)
-                                Spacer(Modifier.height(12.dp))
-                            }
-                        }
-
-                        Text(
-                            "Fechar",
-                            color = AzulMedio,
+                        Column(
                             modifier = Modifier
-                                .clickable { expanded = false }
-                                .fillMaxWidth(),
-                            textAlign = TextAlign.Center
-                        )
+                                .fillMaxSize()
+                                .padding(16.dp)
+                        ) {
+
+                            Text(
+                                "Categorias",
+                                fontWeight = FontWeight.Bold,
+                                color = AzulEscuro
+                            )
+
+                            Spacer(Modifier.height(16.dp))
+
+                            LazyColumn {
+                                items(currentData.categories) {
+                                    ItemDeCategoria(it)
+                                    Spacer(Modifier.height(12.dp))
+                                }
+                            }
+
+                            Text(
+                                "Fechar",
+                                color = AzulMedio,
+                                modifier = Modifier
+                                    .clickable { expanded = false }
+                                    .fillMaxWidth(),
+                                textAlign = TextAlign.Center
+                            )
+                        }
                     }
                 }
             }
